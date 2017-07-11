@@ -43,8 +43,6 @@ export default {
       ;(data.hook || (data.hook = {})).create = (_, vnode) => {
         this.stack.push(vnode.componentInstance)
       }
-      console.log(StackHistory.size())
-      console.log(this.stack.length)
       if (StackHistory.size() < this.stack.length) {
         if (StackHistory.action === 'pop') {
           for (let i = this.stack.length - 1; i >= 0; i--) {

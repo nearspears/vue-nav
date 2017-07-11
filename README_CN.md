@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/vue-nav.svg)](https://www.npmjs.com/package/vue-nav)
 [![npm](https://img.shields.io/npm/dm/vue-nav.svg)](https://www.npmjs.com/package/vue-nav)
 
-> require [vue](https://github.com/vuejs/vue) `2.x` and [vue-router](https://github.com/vuejs/vue-router) `2.x`.
+> 依赖于 [vue](https://github.com/vuejs/vue) `2.x` 和 [vue-router](https://github.com/vuejs/vue-router) `2.x`.
 
 ### 功能
 - 支持缓存上一界面

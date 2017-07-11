@@ -73,7 +73,7 @@ Vue.use(Navigation, {router, store})
 ```
 
 App.vue<br/><br/>
-**You can use stack.direction to control transition. 'stack.direction' is mapped from vuex state**
+**You can use stack.direction to control transition. stack.direction is mapped from vuex state**
 ```vue
 <template>
   <transition :name="'router-' + stack.direction">
@@ -128,3 +128,6 @@ App.vue<br/><br/>
   }
 </style>
 ```
+
+### Thanks
+Thank [vue-navigation](https://github.com/zack24q/vue-navigation), it open my mind to make this

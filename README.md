@@ -11,18 +11,18 @@ The library is a navigation manager, it is similar to native mobile app.
 [中文文档](https://github.com/nearspears/vue-nav/blob/master/README_CN.md)
 
 ### Function
-##### support cache last view
+- support cache last view
   1. A forward to B，then forward to C;
   2. C back to B，B will **recover from cache**;
   3. B back to A，A will **recover from cache**;
   4. A forward to B again，B will **rebuild, not recover from cache**.
-##### support mutiple instances of same page
+- support mutiple instances of same page
   1. A1 and A2 are the same page
   2. A1 forward to B，then forward to A2
   3. A2 back to B，B will **recover from cache**;
   4. B back to A1，A1 will **recover from cache**;
   5. A1 and A2 are **different instance, they can have different state**
-##### support single task like android app
+- support single task like android app
   1. A forward to B，then forward to C, **A is single**
   2. C forward to A, **C and B is destroyed, and removed from navigation stack**
   3. A can't back to C

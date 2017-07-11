@@ -1,37 +1,35 @@
 # vue-nav
 
-The library is a navigation manager, it is similar to native mobile app. 
+本库是个导航管理器，用来模拟原生APP应用导航。
 
 [![npm](https://img.shields.io/npm/v/vue-nav.svg)](https://www.npmjs.com/package/vue-nav)
 [![npm](https://img.shields.io/npm/dm/vue-nav.svg)](https://www.npmjs.com/package/vue-nav)
 
 > require [vue](https://github.com/vuejs/vue) `2.x` and [vue-router](https://github.com/vuejs/vue-router) `2.x`.
 
-[中文文档](https://github.com/nearspears/vue-nav/blob/master/README_CN.md)
+### 功能
+- 支持缓存上一界面
+  1. A 跳转至 B，然后跳转至 C;
+  2. C 返回至 B，B **从缓存中恢复**;
+  3. B 返回至 A，A **从缓存中恢复**;
+  4. A 跳转至 B，B **重新创建，不从缓存中恢复**.
+- 支持同一界面有多个实例
+  1. A1 和 A2 是同一界面
+  2. A1 跳转至 B，然后跳转至 A2
+  3. A2 返回至 B，B **从缓存中恢复**;
+  4. B 返回至 A1，A1 **从缓存中恢复**;
+  5. A1 和 A2 是 **不同的实例，可以有不同的状态**
+- 支持单例模式
+  1. A 跳转至 B，然后跳转至 C, **其中A是单例**
+  2. C 跳转至 A, **则 C 和 B 会被销毁，并从导航栈中移除**
+  3. A 不能再返回　C
 
-### Function
-- support cache last view
-  1. A forward to B，then forward to C;
-  2. C back to B，B will **recover from cache**;
-  3. B back to A，A will **recover from cache**;
-  4. A forward to B again，B will **rebuild, not recover from cache**.
-- support mutiple instances of same page
-  1. A1 and A2 are the same page
-  2. A1 forward to B，then forward to A2
-  3. A2 back to B，B will **recover from cache**;
-  4. B back to A1，A1 will **recover from cache**;
-  5. A1 and A2 are **different instance**
-- support single task like android app
-  1. A forward to B，then forward to C, **A is single**
-  2. C forward to A, **C and B is destroyed, and removed from navigation stack**
-  3. A can't back to C
-
-### Install
+### 安装
 ```bash
 npm install --save vue-nav
 ```
 
-### Usage
+### 使用
 main.js
 
 ```javascript
@@ -50,7 +48,7 @@ App.vue
   </navigation>
 </template>
 ```
-### Use Single Page
+### 使用单例
 ```vue
 <script>
   import ...
@@ -62,7 +60,7 @@ App.vue
 </script>
 ```
 
-### Use with vuex2
+### 配合vuex2使用
 
 main.js
 
@@ -76,7 +74,7 @@ Vue.use(Navigation, {router, store})
 ```
 
 App.vue<br/><br/>
-**You can use stack.direction to control transition. stack.direction is mapped from vuex state**
+**可以从vuex中获取导航跳转方向stack.direction，并通过stack.direction来控制导航的跳转方式**
 ```vue
 <template>
   <transition :name="'router-' + stack.direction">
@@ -132,5 +130,5 @@ App.vue<br/><br/>
 </style>
 ```
 
-### Thanks
-Thank [vue-navigation](https://github.com/zack24q/vue-navigation), it open my mind to make this
+### 感谢
+十分感谢 [vue-navigation](https://github.com/zack24q/vue-navigation)，这个项目让我有灵感实现这个插件

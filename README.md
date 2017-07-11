@@ -2,8 +2,8 @@
 
 The library is a navigation manager, it is similar to native mobile app. 
 
-[![npm](https://img.shields.io/npm/v/vue-navigation.svg)](https://www.npmjs.com/package/vue-navigation)
-[![npm](https://img.shields.io/npm/dm/vue-navigation.svg)](https://www.npmjs.com/package/vue-navigation)
+[![npm](https://img.shields.io/npm/v/vue-nav.svg)](https://www.npmjs.com/package/vue-nav)
+[![npm](https://img.shields.io/npm/dm/vue-nav.svg)](https://www.npmjs.com/package/vue-nav)
 
 > require [vue](https://github.com/vuejs/vue) `2.x` and [vue-router](https://github.com/vuejs/vue-router) `2.x`.
 
@@ -13,8 +13,8 @@ The library is a navigation manager, it is similar to native mobile app.
   2. C back to B，B will **recover from cache**;
   3. B back to A，A will **recover from cache**;
   4. A forward to B again，B will **rebuild, not recover from cache**.
-- support mutiple pages of same type
-  1. A1 and A2 are the same component pages
+- support mutiple instances of same page
+  1. A1 and A2 are the same page
   2. A1 forward to B，then forward to A2
   3. A2 back to B，B will **recover from cache**;
   4. B back to A1，A1 will **recover from cache**;
@@ -47,7 +47,7 @@ App.vue
   </navigation>
 </template>
 ```
-### Single Page
+### Use Single Page
 ```javascript
 <script>
   import ...

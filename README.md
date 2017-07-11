@@ -20,7 +20,7 @@ The library is a navigation manager, it is similar to native mobile app.
   2. A1 forward to B，then forward to A2
   3. A2 back to B，B will **recover from cache**;
   4. B back to A1，A1 will **recover from cache**;
-  5. A1 and A2 are **different instance**
+  5. A1 and A2 are **different instance, they can have different state**
 - support single task like android app
   1. A forward to B，then forward to C, **A is single**
   2. C forward to A, **C and B is destroyed, and removed from navigation stack**

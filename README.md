@@ -48,12 +48,11 @@ App.vue
 </template>
 ```
 ### Use Single Page
-```javascript
+```vue
 <script>
   import ...
 
   export default {
-    name: 'login',
     stackType: 'single'
     ...
   }
@@ -75,7 +74,7 @@ Vue.use(Navigation, {router, store})
 
 App.vue<br/><br/>
 **You can use stack.direction to control transition. 'stack.direction' is mapped from vuex state**
-```
+```vue
 <template>
   <transition :name="'router-' + stack.direction">
     <navigation>

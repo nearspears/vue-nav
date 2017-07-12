@@ -20,7 +20,7 @@ The library is a navigation manager, it is similar to native mobile app.
   1. A forward to B，then forward to A, **navigation stack have A, B, A. Two A are different instance, they can have different state**;
   2. A back to B，**B will recover from cache, navigation stack have A, B**;
   3. B back to A，**A will recover from cache, navigation stack have A**;
-- support single task like android app, see [Use Single Page](#jump)
+- support single task like android app, see [Use Single Page](#use-single-page)
   1. A forward to B，then forward to C, **A is single, navigation stack have A, B, C**
   2. C forward to A, **C and B is destroyed, and removed from navigation stack, navigation stack only have A**
   3. A can't back to C
@@ -54,7 +54,7 @@ App.vue
   </navigation>
 </template>
 ```
-### <span id="jump">Use Single Page</span>
+### Use Single Page
 ```vue
 <script>
   import ...

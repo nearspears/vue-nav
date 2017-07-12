@@ -21,6 +21,20 @@ export default {
       })
     }
 
+    // replace 比较特殊，所以只能监控编程式导航
+    let replace = router.push
+    router.replace = function (location, onComplete, onAbort) {
+      replace.apply(router, [location, () => {
+        var name = NavHistory.pop()
+        NavHistory.pop()
+        NavHistory.push(name)
+        NavHistory.action = 'replace'
+        if (onComplete) {
+          onComplete(arguments)
+        }
+      }, onAbort])
+    }
+
     router.beforeEach((to, from, next) => {
       let matched = to.matched[0]
       if (matched && matched.components) {

@@ -1,4 +1,4 @@
-import StackHistory from './NavHistory'
+import NavHistory from './NavHistory'
 
 function getFirstComponentChild (children) {
   if (Array.isArray(children)) {
@@ -30,6 +30,7 @@ export default {
 
   destroyed () {
     for (let item of this.stack) {
+      item.$vnode.data.hook.destroy(item.$vnode)
       item.$destroy()
     }
   },
@@ -43,29 +44,36 @@ export default {
       ;(data.hook || (data.hook = {})).create = (_, vnode) => {
         this.stack.push(vnode.componentInstance)
       }
-      if (StackHistory.size() < this.stack.length) {
-        if (StackHistory.action === 'pop') {
+      if (NavHistory.size() < this.stack.length) {
+        if (NavHistory.action === 'pop') {
           for (let i = this.stack.length - 1; i >= 0; i--) {
             if (getComponentName(this.stack[i].$vnode.componentOptions) === name) {
               vnode.componentInstance = this.stack[i]
 
               for (let j = this.stack.length - 1; j > i; j--) {
+                this.stack[j].$vnode.data.hook.destroy(this.stack[j].$vnode)
                 this.stack[j].$destroy()
               }
               this.stack.splice(i, this.stack.length - i)
               break
             }
           }
-        } else if (StackHistory.action === 'pushSingle') {
+        } else if (NavHistory.action === 'pushSingle') {
           for (let i = this.stack.length - 1; i >= 0; i--) {
             if (getComponentName(this.stack[i].$vnode.componentOptions) === name) {
               for (let j = this.stack.length - 1; j > i - 1; j--) {
+                this.stack[j].$vnode.data.hook.destroy(this.stack[j].$vnode)
                 this.stack[j].$destroy()
               }
               this.stack.splice(i, this.stack.length - i)
               break
             }
           }
+        }
+      } else if (NavHistory.action === 'replace') {
+        if (getComponentName(this.stack[this.stack.length - 1].$vnode.componentOptions) !== name) {
+          this.stack.splice(this.stack.length - 1, 1)
+          NavHistory.action = 'push' // 重置
         }
       }
       vnode.data.keepAlive = true

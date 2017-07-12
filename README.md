@@ -12,21 +12,24 @@ The library is a navigation manager, it is similar to native mobile app.
 
 ### Function
 - support cache last view
-  1. A forward to B，then forward to C;
-  2. C back to B，B will **recover from cache**;
-  3. B back to A，A will **recover from cache**;
-  4. A forward to B again，B will **rebuild, not recover from cache**.
+  1. A forward to B，then forward to C, **navigation stack have A, B, C**;
+  2. C back to B，**C pop from navigation stack and destroyed, B will recover from cache, navigation stack have A, B**;
+  3. B back to A，**B pop from navigation stack and destroyed, A will recover from cache, navigation stack have A**;
+  4. A forward to B again，**B will rebuild, not recover from cache, navigation stack have A, B**.
 - support mutiple instances of same page
-  1. A1 and A2 are the same page
-  2. A1 forward to B，then forward to A2
-  3. A2 back to B，B will **recover from cache**;
-  4. B back to A1，A1 will **recover from cache**;
-  5. A1 and A2 are **different instance, they can have different state**
+  1. A forward to B，then forward to A, **navigation stack have A, B, A. Two A are different instance, they can have different state**;
+  2. A back to B，**B will recover from cache, navigation stack have A, B**;
+  3. B back to A，**A will recover from cache, navigation stack have A**;
 - support single task like android app
-  1. A forward to B，then forward to C, **A is single**
-  2. C forward to A, **C and B is destroyed, and removed from navigation stack**
+  1. A forward to B，then forward to C, **A is single, navigation stack have A, B, C**
+  2. C forward to A, **C and B is destroyed, and removed from navigation stack, navigation stack only have A**
   3. A can't back to C
-
+- support lifecycle activated and deactivated
+  1. A forward to B, **B is activated**
+  2. B back to A, **A is activated, B is deactivated and then B is destroyed**
+- support router.replace 
+  1. forward to A, then call router.replace　forward to B, **navigation stack will only have A**
+  
 ### Install
 ```bash
 npm install --save vue-nav

@@ -6,9 +6,19 @@ class NavHistory {
   }
 
   push (path) {
+    let index = this.value.indexOf(path)
+    if (index > -1 && index === this.value.length - 1) {
+      return
+    }
     this.value.push(path)
     this.action = 'push'
   }
+
+  // replace (path) {
+  //   this.value.splice(this.value.length - 1, 1)
+  //   this.value.push(path)
+  //   this.action = 'replace'
+  // }
 
   pushSingle (path) {
     var index = -1

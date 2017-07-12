@@ -55,10 +55,8 @@ export default {
         if (store) {
           if (NavHistory.isForward(component.name)) {
             store.commit('updateDirection', 'forward')
-            console.log('forward')
           } else {
             store.commit('updateDirection', 'backward')
-            console.log('backward')
           }
         }
       }

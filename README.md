@@ -28,7 +28,7 @@ The library is a navigation manager, it is similar to native mobile app.
   1. A forward to B, **B is activated**
   2. B back to A, **A is activated, B is deactivated and then B is destroyed**
 - support router.replace 
-  1. forward to A, then call router.replace　forward to B, **navigation stack will only have A**
+  1. current page is A, then call router.replace　forward to B, **navigation stack will only have B**
   
 ### Install
 ```bash

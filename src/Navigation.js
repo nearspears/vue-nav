@@ -44,38 +44,45 @@ export default {
       ;(data.hook || (data.hook = {})).create = (_, vnode) => {
         this.stack.push(vnode.componentInstance)
       }
-      if (NavHistory.size() < this.stack.length) {
-        if (NavHistory.action === 'pop') {
-          for (let i = this.stack.length - 1; i >= 0; i--) {
-            if (getComponentName(this.stack[i].$vnode.componentOptions) === name) {
-              vnode.componentInstance = this.stack[i]
+      console.log(NavHistory.size())
+      console.log(this.stack.length)
+      if (NavHistory.action === 'pop') {
+        for (let i = this.stack.length - 1; i >= 0; i--) {
+          if (getComponentName(this.stack[i].$vnode.componentOptions) === name) {
+            vnode.componentInstance = this.stack[i]
 
-              for (let j = this.stack.length - 1; j > i; j--) {
-                this.stack[j].$vnode.data.hook.destroy(this.stack[j].$vnode)
-                this.stack[j].$destroy()
-              }
-              this.stack.splice(i, this.stack.length - i)
-              break
+            for (let j = this.stack.length - 1; j > i; j--) {
+              this.stack[j].$vnode.data.hook.destroy(this.stack[j].$vnode)
+              this.stack[j].$destroy()
             }
-          }
-        } else if (NavHistory.action === 'pushSingle') {
-          for (let i = this.stack.length - 1; i >= 0; i--) {
-            if (getComponentName(this.stack[i].$vnode.componentOptions) === name) {
-              for (let j = this.stack.length - 1; j > i - 1; j--) {
-                this.stack[j].$vnode.data.hook.destroy(this.stack[j].$vnode)
-                this.stack[j].$destroy()
-              }
-              this.stack.splice(i, this.stack.length - i)
-              break
-            }
+            this.stack.splice(i, this.stack.length - i)
+            console.log(this.stack)
+            break
           }
         }
+        NavHistory.action = 'push' // 重置
+      } else if (NavHistory.action === 'pushSingle') {
+        for (let i = this.stack.length - 1; i >= 0; i--) {
+          if (getComponentName(this.stack[i].$vnode.componentOptions) === name) {
+            for (let j = this.stack.length - 1; j > i - 1; j--) {
+              this.stack[j].$vnode.data.hook.destroy(this.stack[j].$vnode)
+              this.stack[j].$destroy()
+            }
+            this.stack.splice(i, this.stack.length - i)
+            break
+          }
+        }
+        NavHistory.action = 'push' // 重置
       } else if (NavHistory.action === 'replace') {
         if (getComponentName(this.stack[this.stack.length - 1].$vnode.componentOptions) !== name) {
           this.stack.splice(this.stack.length - 1, 1)
-          NavHistory.action = 'push' // 重置
         }
+        NavHistory.action = 'push' // 重置
+      } else if (NavHistory.action === 'clearPush') {
+        this.stack.splice(0, this.stack.length)
+        NavHistory.action = 'push' // 重置
       }
+      console.log(this.stack)
       vnode.data.keepAlive = true
     }
     return vnode

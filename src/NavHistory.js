@@ -14,12 +14,6 @@ class NavHistory {
     this.action = 'push'
   }
 
-  // replace (path) {
-  //   this.value.splice(this.value.length - 1, 1)
-  //   this.value.push(path)
-  //   this.action = 'replace'
-  // }
-
   pushSingle (path) {
     var index = -1
     for (let i = 0; i < this.value.length; i++) {
@@ -38,6 +32,10 @@ class NavHistory {
   pop () {
     this.action = 'pop'
     return this.value.pop()
+  }
+
+  clear () {
+    this.value.splice(0, this.value.length)
   }
 
   size () {

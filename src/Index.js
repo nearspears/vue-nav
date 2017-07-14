@@ -35,6 +35,18 @@ export default {
       }, onAbort])
     }
 
+    router.clearPush = function (location, onComplete, onAbort) {
+      router.push(location, () => {
+        var name = NavHistory.pop()
+        NavHistory.clear()
+        NavHistory.push(name)
+        NavHistory.action = 'clearPush'
+        if (onComplete) {
+          onComplete(arguments)
+        }
+      }, onAbort)
+    }
+
     router.beforeEach((to, from, next) => {
       let matched = to.matched[0]
       if (matched && matched.components) {

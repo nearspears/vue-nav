@@ -29,7 +29,15 @@ The library is a navigation manager, it is similar to native mobile app.
   2. B back to A, **A is activated, B is deactivated and then B is destroyed**
 - support router.replace 
   1. current page is A, then call router.replace　forward to B, **navigation stack will only have B**
+  2. you can use router.replace when app login to prevent user come back to login page, like **this.$router.replace('/main')**
+- support router.clearPush 
+  1. A forward to B, **navigation stack have A, B**
+  2. then call router.clearPush　forward to C, **navigation stack will only have C**
+  3. you can use clearPush when app logout and jump to login page, like **this.$router.clearPush('/login')**
   
+### Attention
+  This Plugin just manage the page instance of navigation stack, it will not change the history of browser. So browser history is just as like as vue-router
+
 ### Install
 ```bash
 npm install --save vue-nav

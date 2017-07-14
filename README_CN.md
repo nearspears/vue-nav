@@ -25,8 +25,16 @@
 - 支持生命周期activated和deactivated回调
   1. A跳转至B, **B触发activated**
   2. B返回至A, **A触发activated, B触发deactivated，然后B触发destroyed进行销毁**
-- 支持router.replace编程式导航
+- 支持替换式跳转router.replace
   1. 当前在A界面, 调用router.replace跳转至B, **此时导航栈中只有B**
+  2. 你可以在登录时使用router.replace防止用户返回登录界面，例:**this.$router.replace('/main')**
+- 支持清空式跳转router.clearPush
+  1. A跳转至B, **此时导航栈中只有A, B**
+  2. 然后调用router.clearPush跳转至C, **此时导航栈中只有C**
+  3. 你可以在会话过期时使用router.clearPush强制用户退出系统, 例:**this.$router.clearPush('/login')**
+
+### 注意
+  本插件主要管理导航的界面缓存实例，并不会试图去改变浏览器的历史记录，因此浏览器的相关跳转历史和vue-router原生的处理一致，并不会有任何变化
   
 ### 安装
 ```bash

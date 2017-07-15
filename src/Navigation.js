@@ -44,8 +44,6 @@ export default {
       ;(data.hook || (data.hook = {})).create = (_, vnode) => {
         this.stack.push(vnode.componentInstance)
       }
-      console.log(NavHistory.size())
-      console.log(this.stack.length)
       if (NavHistory.action === 'pop') {
         for (let i = this.stack.length - 1; i >= 0; i--) {
           if (getComponentName(this.stack[i].$vnode.componentOptions) === name) {
@@ -56,7 +54,6 @@ export default {
               this.stack[j].$destroy()
             }
             this.stack.splice(i, this.stack.length - i)
-            console.log(this.stack)
             break
           }
         }
@@ -82,7 +79,6 @@ export default {
         this.stack.splice(0, this.stack.length)
         NavHistory.action = 'push' // 重置
       }
-      console.log(this.stack)
       vnode.data.keepAlive = true
     }
     return vnode
